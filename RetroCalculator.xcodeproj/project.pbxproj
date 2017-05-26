@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09CF62571ED1E1AB0039FF4E /* btn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 09CF62561ED1E1AB0039FF4E /* btn.wav */; };
 		09F0E56C1ED09C27000F54F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0E56B1ED09C27000F54F7 /* AppDelegate.swift */; };
 		09F0E56E1ED09C27000F54F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0E56D1ED09C27000F54F7 /* ViewController.swift */; };
 		09F0E5711ED09C27000F54F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F0E56F1ED09C27000F54F7 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09CF62561ED1E1AB0039FF4E /* btn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = btn.wav; sourceTree = "<group>"; };
 		09F0E5681ED09C27000F54F7 /* RetroCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F0E56B1ED09C27000F54F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F0E56D1ED09C27000F54F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				09F0E56B1ED09C27000F54F7 /* AppDelegate.swift */,
 				09F0E56D1ED09C27000F54F7 /* ViewController.swift */,
+				09CF62561ED1E1AB0039FF4E /* btn.wav */,
 				09F0E56F1ED09C27000F54F7 /* Main.storyboard */,
 				09F0E5721ED09C27000F54F7 /* Assets.xcassets */,
 				09F0E5741ED09C27000F54F7 /* LaunchScreen.storyboard */,
@@ -126,6 +129,7 @@
 				09F0E5761ED09C27000F54F7 /* LaunchScreen.storyboard in Resources */,
 				09F0E5731ED09C27000F54F7 /* Assets.xcassets in Resources */,
 				09F0E5711ED09C27000F54F7 /* Main.storyboard in Resources */,
+				09CF62571ED1E1AB0039FF4E /* btn.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +303,7 @@
 				09F0E57C1ED09C27000F54F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
