@@ -25,6 +25,7 @@
  Update 
  
  Added a clear button. Program is functionally complete.
+ Todo: add error case for dividing by 0 
  
 
  
@@ -147,21 +148,30 @@ class ViewController: UIViewController {
     
     func numtoScreen(_ input:Int)
     {
-        currentVal = currentVal! + String(input)
+        if (eFlag == false)
+        {
+            currentVal = currentVal! + String(input)
+            
+            initialVal = Int(currentVal!)
+            
+            print ("Initial Value: " + String(describing: initialVal))
+            
+            display.text = currentVal!
+        }
         
-        initialVal = Int(currentVal!)
+        else
+        {
+            display.text = "Error"
+        }
         
-        display.text = currentVal!
+   
      
     }
     
     @IBAction func clearScreen(_ sender: Any)
     {
-        currentVal = ""
-        initialVal = 0
-        memory = 0
-        
-        display.text = String(0)
+        clear()
+        playSound()
         
     }
     
@@ -280,7 +290,7 @@ class ViewController: UIViewController {
             var temp  = currentVal!
             
             if (temp == "")
-            {              //e.g. num / 1 = num 
+            {              //e.g. num / 1 = num
                 temp = "1" //Set this to 1 to return number after repeat op is pressed
             }
             
@@ -292,12 +302,22 @@ class ViewController: UIViewController {
                 currentVal = "0"
             }
             
-            currentVal = String (memory! / Int(currentVal!)!)
+            if (currentVal! != "0")
+            {
+                currentVal = String (memory! / Int(currentVal!)!)
+                
+                
+                memory = Int(temp)
+                
+                display.text = currentVal!
+
+            }
             
+            else
+            {
+                eFlag = true
+            }
             
-            memory = Int(temp)
-            
-            display.text = currentVal!
             
         }
         
@@ -307,150 +327,174 @@ class ViewController: UIViewController {
         
     }
     
-    //basic function to set and prepare memory for operation
-    func setMemory()
-    {
-        
-    }
+   
     
     //performs the 2 num op when equal button is pressed
     func performOp()
     {
-        if (operation == "+" || (lastOp == "+" && operation == nil))
+        if (eFlag == false)
         {
-            //print ("Memory inside equal func: " + String(describing: memory!))
-            //print ("Current Value inside equal func: " + currentVal!)
-            
-            if (currentVal! == "")
+            if (operation == "+" || (lastOp == "+" && operation == nil))
             {
-                currentVal = "0"
+                //print ("Memory inside equal func: " + String(describing: memory!))
+                //print ("Current Value inside equal func: " + currentVal!)
+                
+                if (currentVal! == "")
+                {
+                    currentVal = "0"
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                if (operation == nil)
+                {
+                    currentVal = String (Int(currentVal!)! + initialVal!)
+                    print ("Initial Val inside equal func: " + String(describing: initialVal!))
+                    //memory = Int(currentVal!)
+                    
+                }
+                    
+                else
+                {
+                    currentVal = String (memory! + Int(currentVal!)!)
+                }
+                
+                
+                
+                lastOp = "+"
+                operation = nil
             }
             
-          
-         
-            
-            
-            
-            
-            
-            if (operation == nil)
+            if (operation == "-" || (lastOp == "-" && operation == nil))
             {
-                currentVal = String (Int(currentVal!)! + initialVal!)
-                print ("Initial Val inside equal func: " + String(describing: initialVal!))
-                //memory = Int(currentVal!)
+                print ("Memory inside equal func: " + String(describing: memory!))
+                print ("Current Value inside equal func: " + currentVal!)
                 
+                if (currentVal! == "")
+                {
+                    currentVal = "0"
+                }
+                
+                
+                
+                if (operation == nil)
+                {
+                    currentVal = String (Int(currentVal!)! - initialVal!)
+                    print ("Initial Val inside equal func: " + String(describing: initialVal!))
+                    //memory = Int(currentVal!)
+                    
+                }
+                    
+                else
+                {
+                    currentVal = String (memory! - Int(currentVal!)!)
+                }
+                
+                
+                
+                lastOp = "-"
+                operation = nil
+            }
+            
+            if (operation == "/" || (lastOp == "/" && operation == nil))
+            {
+                
+                print ("Memory inside equal func: " + String(describing: memory!))
+                print ("Current Value inside equal func: " + currentVal!)
+                
+                if (currentVal! == "")
+                {
+                    currentVal = "0"
+                }
+                
+                
+                
+                
+                if (operation == nil)
+                {
+                    currentVal = String (Int(currentVal!)! / initialVal!)
+                    print ("Initial Val inside equal func: " + String(describing: initialVal!))
+                    //memory = Int(currentVal!)
+                    
+                }
+                    
+                else
+                {
+                    if (currentVal! != "0")
+                    {
+                        currentVal = String (memory! / Int(currentVal!)!)
+                    }
+                        
+                    else
+                    {
+                        eFlag = true
+                    }
+                    
+                }
+                
+                
+                
+                lastOp = "/"
+                operation = nil
+            }
+            
+            
+            if (operation == "*" || (lastOp == "*" && operation == nil))
+            {
+                print ("Memory inside equal func: " + String(describing: memory!))
+                print ("Current Value inside equal func: " + currentVal!)
+                
+                if (currentVal! == "")
+                {
+                    currentVal = "0"
+                }
+                
+                
+                
+                if (operation == nil)
+                {
+                    currentVal = String (Int(currentVal!)! * initialVal!)
+                    print ("Initial Val inside equal func: " + String(describing: initialVal!))
+                    //memory = Int(currentVal!)
+                    
+                }
+                    
+                else
+                {
+                    currentVal = String (memory! * Int(currentVal!)!)
+                }
+                
+                
+                
+                lastOp = "*"
+                operation = nil
+            }
+            
+            
+            
+            if (eFlag == false)
+            {
+                display.text = currentVal
             }
             
             else
             {
-                currentVal = String (memory! + Int(currentVal!)!)
+                display.text = "Error"
             }
-            
-            
-            
-            lastOp = "+"
-            operation = nil
-        }
 
-        if (operation == "-" || (lastOp == "-" && operation == nil))
+        }
+        
+        else
         {
-            print ("Memory inside equal func: " + String(describing: memory!))
-            print ("Current Value inside equal func: " + currentVal!)
-            
-            if (currentVal! == "")
-            {
-                currentVal = "0"
-            }
-            
-            
-            
-            if (operation == nil)
-            {
-                currentVal = String (Int(currentVal!)! - initialVal!)
-                print ("Initial Val inside equal func: " + String(describing: initialVal!))
-                //memory = Int(currentVal!)
-                
-            }
-                
-            else
-            {
-                currentVal = String (memory! - Int(currentVal!)!)
-            }
-            
-            
-            
-            lastOp = "-"
-            operation = nil
+            display.text = "Error"
         }
         
-        if (operation == "/" || (lastOp == "/" && operation == nil))
-        {
-            print ("Memory inside equal func: " + String(describing: memory!))
-            print ("Current Value inside equal func: " + currentVal!)
-            
-            if (currentVal! == "")
-            {
-                currentVal = "0"
-            }
-            
-            
-            
-            if (operation == nil)
-            {
-                currentVal = String (Int(currentVal!)! / initialVal!)
-                print ("Initial Val inside equal func: " + String(describing: initialVal!))
-                //memory = Int(currentVal!)
-                
-            }
-                
-            else
-            {
-                currentVal = String (memory! / Int(currentVal!)!)
-            }
-            
-            
-            
-            lastOp = "/"
-            operation = nil
-        }
-
-
-        if (operation == "*" || (lastOp == "*" && operation == nil))
-        {
-            print ("Memory inside equal func: " + String(describing: memory!))
-            print ("Current Value inside equal func: " + currentVal!)
-            
-            if (currentVal! == "")
-            {
-                currentVal = "0"
-            }
-            
-            
-            
-            if (operation == nil)
-            {
-                currentVal = String (Int(currentVal!)! * initialVal!)
-                print ("Initial Val inside equal func: " + String(describing: initialVal!))
-                //memory = Int(currentVal!)
-                
-            }
-                
-            else
-            {
-                currentVal = String (memory! * Int(currentVal!)!)
-            }
-            
-            
-            
-            lastOp = "*"
-            operation = nil
-        }
         
-
-        
-        
-        display.text = currentVal
-   
 
     }
     
@@ -458,36 +502,46 @@ class ViewController: UIViewController {
     //clears the screen
     func clear()
     {
-
+        currentVal = ""
+        initialVal = 0
+        memory = 0
+        eFlag = false
+        
+        display.text = String(0)
         
     }
     
     @IBAction func divPressed(_ sender: Any)
     {
         div()
+        playSound()
         
     }
     
     @IBAction func multPressed(_ sender: Any)
     {
         mult()
+        playSound()
      
     }
     
     @IBAction func subPressed(_ sender: Any)
     {
         sub()
+        playSound()
       
     }
     
     @IBAction func addPressed(_ sender: Any)
     {
         add()
+        playSound()
     }
     
     @IBAction func equalPressed(_ sender: Any)
     {
         performOp()
+        playSound()
     }
     
 
